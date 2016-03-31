@@ -5,6 +5,8 @@ var readline = require('readline');
 var split = require('argv-split');
 var redis = require('redis');
 var redisCommands = require('redis-commands');
+var isJSON = require('is-json');
+var colorJSON = require('json-colorz');
 
 var options = getOptions();
 var client = createRedisClient(options);
@@ -28,7 +30,7 @@ rl.on('line', (line) => {
 
   commandFunc(commandName, commandArgs, (err, reply) => {
     if (err) console.error(err);
-    if (reply) console.dir(reply);
+    if (reply) displayReply(reply);
     lastReply = reply;
     rl.prompt();
   });
@@ -95,4 +97,20 @@ function saveCommand(name, args, callback) {
   var filename = args[0];
   fs.writeFileSync(filename, JSON.stringify(lastReply));
   callback(null, 'Saved last reply to ' + filename);
+}
+
+function displayReply(reply) {
+  // Formatters
+  if (typeof reply === 'string') {
+    if (isJSON(reply)) {
+      reply = JSON.parse(reply);
+    }
+  }
+
+  // Renderers
+  if (typeof reply === 'string') {
+    console.log(reply);
+  } else {
+    colorJSON(reply);
+  }
 }
