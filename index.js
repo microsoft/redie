@@ -16,6 +16,7 @@ var rl = readline.createInterface({
   output: process.stdout
 });
 
+rl.setPrompt(options.hostname + '> ');
 rl.prompt();
 
 rl.on('line', (line) => {
