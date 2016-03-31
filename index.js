@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 var process = require('process');
 var fs = require('fs');
 var commandLineArgs = require('command-line-args');
