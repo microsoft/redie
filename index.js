@@ -41,10 +41,10 @@ rl.on('line', (line) => {
 
 function getOptions() {
   var cli = commandLineArgs([
-    { name: 'hostname', alias: 'h', type: String, defaultValue: '127.0.0.1' },
-    { name: 'port', alias: 'p', type: Number, defaultValue: 6379 },
-    { name: 'password', alias: 'a', type: String },
-    { name: 'tls', type: Boolean }
+    { name: 'hostname', alias: 'h', type: String, defaultValue: process.env.REDIS_HOSTNAME || '127.0.0.1' },
+    { name: 'port', alias: 'p', type: Number, defaultValue: process.env.REDIS_PORT || 6379 },
+    { name: 'password', alias: 'a', type: String, defaultValue: process.env.REDIS_PASSWORD },
+    { name: 'tls', type: Boolean, defaultValue: !!process.env.REDIS_TLS }
   ]);
 
   var options = cli.parse();
