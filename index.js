@@ -1,4 +1,9 @@
-#! /usr/bin/env node
+#! /usr/bin / env node
+
+/* --------------------------------------------------------------------------------------------
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See LICENSE in the project root for license information.
+ * ------------------------------------------------------------------------------------------ */
 var process = require('process');
 var fs = require('fs');
 var commandLineArgs = require('command-line-args');
