@@ -1,7 +1,7 @@
 {
   "name": "redie",
   "version": "0.1.0",
-  "description": "",
+  "description": "Redis client focused on providing a delightful user experience.",
   "main": "index.js",
   "bin": {
     "redie": "index.js"

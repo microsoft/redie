@@ -14,7 +14,17 @@ var redisCommands = require('redis-commands');
 var isJSON = require('is-json');
 var colorJSON = require('json-colorz');
 
-var options = getOptions();
+var args = getArgs();
+var options = getOptions(args);
+if (options.help) {
+  console.log(getUsage(args));
+  return;
+}
+if (options.version) {
+  console.log(getVersion());
+  return;
+}
+
 var client = createRedisClient(options);
 var commands = getCommands();
 var lastReply;
@@ -44,16 +54,31 @@ rl.on('line', (line) => {
   process.exit(0);
 });
 
-function getOptions() {
+function getVersion() {
+  var package = require('./package.json');
+  return package.name + ' ' + package.version;
+}
+
+function getArgs() {
   var cli = commandLineArgs([
     { name: 'hostname', alias: 'h', type: String, defaultValue: process.env.REDIS_HOSTNAME || '127.0.0.1' },
     { name: 'port', alias: 'p', type: Number, defaultValue: process.env.REDIS_PORT || 6379 },
     { name: 'password', alias: 'a', type: String, defaultValue: process.env.REDIS_PASSWORD },
-    { name: 'tls', type: Boolean, defaultValue: !!process.env.REDIS_TLS }
+    { name: 'tls', type: Boolean, defaultValue: !!process.env.REDIS_TLS },
+    { name: 'version', alias: 'v', type: Boolean },
+    { name: 'help', alias: '?', type: Boolean }
   ]);
 
-  var options = cli.parse();
+  return cli;
+}
+
+function getOptions(args) {
+  var options = args.parse();
   return options;
+}
+
+function getUsage(args) {
+  return args.getUsage({ title: getVersion(), description: require('./package.json').description });
 }
 
 function createRedisClient(options) {
