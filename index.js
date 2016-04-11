@@ -13,6 +13,7 @@ var redis = require('redis');
 var redisCommands = require('redis-commands');
 var isJSON = require('is-json');
 var colorJSON = require('json-colorz');
+var package = require('./package.json');
 
 var args = getArgs();
 var options = getOptions(args);
@@ -55,7 +56,6 @@ rl.on('line', (line) => {
 });
 
 function getVersion() {
-  var package = require('./package.json');
   return package.name + ' ' + package.version;
 }
 
@@ -78,7 +78,7 @@ function getOptions(args) {
 }
 
 function getUsage(args) {
-  return args.getUsage({ title: getVersion(), description: require('./package.json').description });
+  return args.getUsage({ title: getVersion(), description: package.description });
 }
 
 function createRedisClient(options) {
