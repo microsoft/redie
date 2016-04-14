@@ -1,4 +1,4 @@
-#! /usr/bin / env node
+#!/usr/bin/env node
 
 /* --------------------------------------------------------------------------------------------
  * Copyright (c) Microsoft Corporation. All rights reserved.
