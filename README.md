@@ -17,9 +17,8 @@ hostname>
 
 # Commands
 Redie supports the full set of Redis commands with the exception of:
-* `BATCH`
-* `MULTI`
-* Subscription commands
+* `BATCH`, `MULTI`
+* `SUBSCRIBE`, `UNSUBSCRIBE`, `PSUBSCRIBE`, `PUNSUBSCRIBE`
 
 Redie also adds the following commands:
 * `HELP [pattern]` lists the Redis commands matching the specified pattern (wildcards supported)
