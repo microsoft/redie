@@ -19,6 +19,7 @@ hostname>
 Redie supports the full set of Redis commands with the exception of:
 * `BATCH`
 * `MULTI`
+* Subscription commands
 
 Redie also adds the following commands:
 * `HELP [pattern]` lists the Redis commands matching the specified pattern (wildcards supported)
@@ -26,6 +27,7 @@ Redie also adds the following commands:
 * `QUIT` exits the Redie shell
 
 # Roadmap
+* Support for subscriptions
 * Support for BATCH and MULTI
 * Formatting for more types (e.g. HTML)
 * Extensible formatting

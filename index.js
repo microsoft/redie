@@ -56,7 +56,12 @@ function startReplLoop() {
 
     var commandName = command.length === 0 ? 'NOOP' : command[0].toUpperCase();
     var commandArgs = command.splice(1);
-    var commandFunc = commands[commandName] || commands.NOOP;
+    var commandFunc = commands[commandName];
+    if (!commandFunc) {
+      commandFunc = commands.HELP;
+      commandArgs = [];
+      console.error('Unknown command \'' + commandName + '\', valid commands are:');
+    }
 
     commandFunc(commandName, commandArgs, (err, reply) => {
       if (err) console.error(err);
@@ -109,6 +114,7 @@ function getCommands() {
   for (var i = 0; i < redisCommands.list.length; i++) {
     commands[redisCommands.list[i].toUpperCase()] = client.send_command.bind(client);
   }
+  commands[''] = noopCommand;
   commands.HELP = helpCommand;
   commands.NOOP = noopCommand;
   commands.EXIT = quitCommand;
