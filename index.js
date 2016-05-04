@@ -26,34 +26,48 @@ if (options.version) {
   return;
 }
 
+var firstConnect = true;
 var client = createRedisClient(options);
-var commands = getCommands();
-var lastReply;
-
-var rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
+client.on('error', (err) => {
+  console.error(err.message);
+  quitCommand();
+});
+client.on('ready', () => {
+  if (firstConnect) {
+    firstConnect = false;
+    startReplLoop();
+  }
 });
 
-rl.setPrompt(options.hostname + '> ');
-rl.prompt();
+function startReplLoop() {
+  var commands = getCommands();
+  var lastReply;
 
-rl.on('line', (line) => {
-  var command = split(line);
-
-  var commandName = command.length === 0 ? 'NOOP' : command[0].toUpperCase();
-  var commandArgs = command.splice(1);
-  var commandFunc = commands[commandName] || commands['NOOP'];
-
-  commandFunc(commandName, commandArgs, (err, reply) => {
-    if (err) console.error(err);
-    if (reply) displayReply(reply);
-    lastReply = reply;
-    rl.prompt();
+  var rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
   });
-}).on('close', () => {
-  process.exit(0);
-});
+
+  rl.setPrompt(options.hostname + '> ');
+  rl.prompt();
+
+  rl.on('line', (line) => {
+    var command = split(line);
+
+    var commandName = command.length === 0 ? 'NOOP' : command[0].toUpperCase();
+    var commandArgs = command.splice(1);
+    var commandFunc = commands[commandName] || commands.NOOP;
+
+    commandFunc(commandName, commandArgs, (err, reply) => {
+      if (err) console.error(err);
+      if (reply) displayReply(reply);
+      lastReply = reply;
+      rl.prompt();
+    });
+  }).on('close', () => {
+    process.exit(0);
+  });
+}
 
 function getVersion() {
   return package.name + ' ' + package.version;
@@ -95,11 +109,11 @@ function getCommands() {
   for (var i = 0; i < redisCommands.list.length; i++) {
     commands[redisCommands.list[i].toUpperCase()] = client.send_command.bind(client);
   }
-  commands['HELP'] = helpCommand;
-  commands['NOOP'] = noopCommand;
-  commands['EXIT'] = quitCommand;
-  commands['QUIT'] = quitCommand;
-  commands['SAVE'] = saveCommand;
+  commands.HELP = helpCommand;
+  commands.NOOP = noopCommand;
+  commands.EXIT = quitCommand;
+  commands.QUIT = quitCommand;
+  commands.SAVE = saveCommand;
   return commands;
 }
 
