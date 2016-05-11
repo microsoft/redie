@@ -1,7 +1,7 @@
-![Redie Screenshot](screenshot.png)
-
 # Redie
 Redis client focused on providing a delightful user experience.
+
+![Redie Screenshot](screenshot.png)
 
 # Usage
 Connect to your Redis server by passing the following command-line arguments (or setting their environment variable equivalents):
