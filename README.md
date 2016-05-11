@@ -1,3 +1,5 @@
+![Redie Screenshot](screenshot.png)
+
 # Redie
 Redis client focused on providing a delightful user experience.
 
