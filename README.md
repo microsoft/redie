@@ -1,3 +1,7 @@
+![Version](https://img.shields.io/npm/v/redie.svg)
+![License](https://img.shields.io/github/license/Microsoft/redie.svg)
+![Downloads](https://img.shields.io/npm/dt/redie.svg)
+
 # Redie
 Redis client focused on providing a delightful user experience.
 
