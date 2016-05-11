@@ -145,8 +145,16 @@ function quitCommand(name, args, callback) {
 function saveCommand(name, args, callback) {
   if (args.length !== 1) return callback('SAVE filename', null);
   if (!lastReply) return callback('No reply to save', null);
+
+  var fileContent;
+  if (typeof lastReply === 'string') {
+    fileContent = lastReply;
+  } else {
+    fileContent = JSON.stringify(lastReply);
+  }
+
   var filename = args[0];
-  fs.writeFileSync(filename, JSON.stringify(lastReply));
+  fs.writeFileSync(filename, fileContent);
   callback(null, 'Saved last reply to ' + filename);
 }
 
