@@ -39,9 +39,9 @@ client.on('ready', () => {
   }
 });
 
+var lastReply;
 function startReplLoop() {
   var commands = getCommands();
-  var lastReply;
 
   var rl = readline.createInterface({
     input: process.stdin,
