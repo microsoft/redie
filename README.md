@@ -11,7 +11,7 @@ Redis client focused on providing a delightful user experience.
 Connect to your Redis server by passing the following command-line arguments (or setting their environment variable equivalents):
 ```
   -h      Hostname to connect to (defaults to 127.0.0.1 or REDIS_HOSTNAME environment variable)
-  -p      Port to connect to (defaults to 6379 or REDIS_PORT environment variable)
+  -p      Port to connect to (defaults to 6379 (non-TLS), 6380 (TLS), or REDIS_PORT environment variable)
   -a      Password to use to connect (defaults to REDIS_PASSWORD environment variable)
   --tls   Use TLS to connect (defaults to on if REDIS_TLS environment variable is set)
 ```
