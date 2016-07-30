@@ -14,6 +14,7 @@ var redisCommands = require('redis-commands');
 var isJSON = require('is-json');
 var colorJSON = require('json-colorz');
 var package = require('./package.json');
+var painlessConfig = require('painless-config');
 
 var args = getArgs();
 var options = getOptions(args);
@@ -80,10 +81,10 @@ function getVersion() {
 
 function getArgs() {
   var cli = commandLineArgs([
-    { name: 'hostname', alias: 'h', type: String, defaultValue: process.env.REDIS_HOSTNAME || '127.0.0.1' },
-    { name: 'port', alias: 'p', type: Number, defaultValue: process.env.REDIS_PORT },
-    { name: 'password', alias: 'a', type: String, defaultValue: process.env.REDIS_PASSWORD },
-    { name: 'tls', type: Boolean, defaultValue: !!process.env.REDIS_TLS },
+    { name: 'hostname', alias: 'h', type: String, defaultValue: painlessConfig.get('REDIS_HOSTNAME') || '127.0.0.1' },
+    { name: 'port', alias: 'p', type: Number, defaultValue: painlessConfig.get('REDIS_PORT') },
+    { name: 'password', alias: 'a', type: String, defaultValue: painlessConfig.get('REDIS_PASSWORD') },
+    { name: 'tls', type: Boolean, defaultValue: !!painlessConfig.get('REDIS_TLS') },
     { name: 'version', alias: 'v', type: Boolean },
     { name: 'help', alias: '?', type: Boolean }
   ]);
