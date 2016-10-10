@@ -42,10 +42,10 @@ Redie also adds the following commands:
 
 # Contributing
 
-You must have the following installed on your system
+You must have the following installed on your system:
 
-* Redis Server
-* NodeJS, along with npm
+* Redis Server (for local testing)
+* NodeJS+npm
 
 To start working, run ```npm install``` in the repository folder to install the required dependencies.
 
