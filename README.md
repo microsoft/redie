@@ -41,4 +41,14 @@ Redie also adds the following commands:
 * Run commands from a file (both from the command-line and the shell)
 
 # Contributing
+
+You must have the following installed on your system
+
+* Redis Server
+* NodeJS, along with npm
+
+To start working, run ```npm install``` in the repository folder to install the required dependencies.
+
+Then run ```nodejs index.js``` to get the redie command line
+
 Pull requests will gladly be considered!
