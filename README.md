@@ -22,6 +22,12 @@ Once connected you'll be placed in a "Redie shell" where you can execute command
 hostname>
 ```
 
+### Using npx to start the Redie shell
+
+```
+npx redie -h <hostname> -a <password> --tls
+```
+
 # Commands
 Redie supports the full set of Redis commands with the exception of:
 * `BATCH`, `MULTI`
